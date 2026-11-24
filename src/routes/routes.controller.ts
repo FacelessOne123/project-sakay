@@ -1,8 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { RoutesService } from './routes.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateRouteDto } from './dto/create-route.dto';
 import { UpdateRouteDto } from './dto/update-route.dto';
+import { RoutesService } from './routes.service';
 
+@UseGuards(JwtAuthGuard)
 @Controller('routes')
 export class RoutesController {
   constructor(private readonly routesService: RoutesService) {}
@@ -18,17 +30,20 @@ export class RoutesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.routesService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.routesService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRouteDto: UpdateRouteDto) {
-    return this.routesService.update(+id, updateRouteDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateRouteDto: UpdateRouteDto,
+  ) {
+    return this.routesService.update(id, updateRouteDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.routesService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.routesService.remove(id);
   }
 }
