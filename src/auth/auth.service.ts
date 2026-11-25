@@ -14,7 +14,7 @@ export class AuthService {
   ) {}
 
   register(registerDto: RegisterDto) {
-    return this.usersService.create(registerDto);
+    return this.usersService.create({ ...registerDto, role: 'Commuter' });
   }
 
   async login(loginDto: LoginDto) {
