@@ -10,7 +10,7 @@ import {
 } from 'class-validator';
 import { ValidateWhenPresent } from '../../common/validators/validate-when-present.decorator';
 
-export const USER_ROLES = ['Admin', 'Dispatcher', 'Passenger'] as const;
+export const USER_ROLES = ['Commuter', 'Driver', 'Dispatcher', 'Admin'] as const;
 export type UserRole = (typeof USER_ROLES)[number];
 
 export class CreateUserDto {

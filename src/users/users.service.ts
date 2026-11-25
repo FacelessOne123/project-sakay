@@ -49,7 +49,7 @@ export class UsersService {
       fullName: createUserDto.fullName,
       email,
       passwordHash,
-      role: createUserDto.role ?? 'Passenger',
+      role: createUserDto.role ?? 'Commuter',
       phoneNumber: createUserDto.phoneNumber ?? null,
     });
 
